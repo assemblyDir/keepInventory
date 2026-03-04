@@ -1,5 +1,6 @@
 package com.github.assemblyDir.keepInventory;
 
+import com.github.assemblyDir.keepInventory.api.KeepInventorySwitcherEvent;
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
@@ -71,6 +72,7 @@ public class KeepInventoryCommand {
                     break;
                 }
                 KeepInventoryUtil.keepInventory(player.getPersistentDataContainer(), true);
+                new KeepInventorySwitcherEvent(player, sender, true);
                 player.sendMessage(Component.text("✔ Keep inventory enabled!").color(TextColor.color(140, 252, 3)));
                 if (!player.equals(sender)) sender.sendMessage(Component.text("✔ Keep inventory for " + player.getName() + " enabled!").color(TextColor.color(140, 252, 3)));
                 break;
@@ -81,6 +83,7 @@ public class KeepInventoryCommand {
                     break;
                 }
                 KeepInventoryUtil.keepInventory(player.getPersistentDataContainer(), false);
+                new KeepInventorySwitcherEvent(player, sender, false);
                 player.sendMessage(Component.text("✔ Keep inventory disabled!").color(TextColor.color(140, 252, 3)));
                 if (!player.equals(sender)) sender.sendMessage(Component.text("✔ Keep inventory for " + player.getName() + " disabled!").color(TextColor.color(140, 252, 3)));
                 break;

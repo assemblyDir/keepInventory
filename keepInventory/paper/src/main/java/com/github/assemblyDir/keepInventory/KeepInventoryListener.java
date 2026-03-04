@@ -1,5 +1,6 @@
 package com.github.assemblyDir.keepInventory;
 
+import com.github.assemblyDir.keepInventory.api.KeepInventoryDeathEvent;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
@@ -8,7 +9,9 @@ public class KeepInventoryListener implements Listener {
 
     @EventHandler
     public void onDeath(PlayerDeathEvent event) {
-        if (KeepInventoryUtil.keepInventory(event.getPlayer().getPersistentDataContainer())) {
+        boolean keepInventoryEnabled = KeepInventoryUtil.keepInventory(event.getPlayer().getPersistentDataContainer());
+        new KeepInventoryDeathEvent(event.getPlayer(), event.getDamageSource(), event.getDrops(), event.getDroppedExp(), event.deathMessage(), event.getShowDeathMessages(), keepInventoryEnabled).callEvent();
+        if (keepInventoryEnabled) {
             event.setKeepInventory(true);
             event.setKeepLevel(true);
             event.getDrops().clear();
