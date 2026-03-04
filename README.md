@@ -2,6 +2,8 @@
 
 **keepInventory** is a modern Minecraft plugin for PaperMC servers designed to toggle inventory retention rules for individual players.
 
+---
+
 ### Available commands:
 - keepInventory on -> Enable keepInventory for yourself
 - keepInventory on [player] -> Enable keepInventory for the player
