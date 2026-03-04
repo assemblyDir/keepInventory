@@ -1,0 +1,5 @@
+name: ${name}
+version: ${version}
+main: ${main}
+api-version: ${minecraft_version}
+authors: [ alexthegoood ]
