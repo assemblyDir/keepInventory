@@ -7,6 +7,7 @@ import org.bukkit.event.HandlerList;
 
 public class KeepInventorySwitcherEvent extends Event {
 
+    private static final HandlerList HANDLER_LIST = new HandlerList();
     private final Player player;
     private final CommandSender switchedBy;
     private final boolean keepInventoryState;
@@ -28,8 +29,6 @@ public class KeepInventorySwitcherEvent extends Event {
     public boolean getKeepInventoryState() {
         return keepInventoryState;
     }
-
-    private static final HandlerList HANDLER_LIST = new HandlerList();
 
     public static HandlerList getHandlerList() {
         return HANDLER_LIST;
