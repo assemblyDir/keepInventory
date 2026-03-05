@@ -10,6 +10,6 @@ repositories {
 #### Add dependency:
 ```kotlin
 dependencies {
-    implementation("com.github.assemblyDir.keepInventory:api:1.0.0")
+    implementation("com.github.assemblyDir.keepInventory:api:1.1.0")
 }
 ```
