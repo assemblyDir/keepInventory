@@ -29,9 +29,9 @@ public final class KeepInventoryCommand {
     private static final Collection<String> COMMAND_ALIASES = List.of("keepinv");
 
     public static void register(@NotNull JavaPlugin instance) {
-        instance.getLifecycleManager().registerEventHandler(LifecycleEvents.COMMANDS, commands -> {
-            commands.registrar().register(commandNode(), COMMAND_ALIASES);
-        });
+        instance.getLifecycleManager().registerEventHandler(LifecycleEvents.COMMANDS, commands ->
+            commands.registrar().register(commandNode(), COMMAND_ALIASES)
+        );
     }
 
     private static LiteralCommandNode<CommandSourceStack> commandNode() {
