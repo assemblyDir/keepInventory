@@ -36,11 +36,11 @@ public final class KeepInventoryCommand {
 
     private static LiteralCommandNode<CommandSourceStack> commandNode() {
         var player = Commands.argument("player", ArgumentTypes.player())
-                .requires(req -> req.getSender().hasPermission("keepinventory.command.other"))
+                .requires(req -> req.getSender().hasPermission(KeepInventoryPermissions.Permissions.COMMAND_OTHER.get()))
                 .executes(KeepInventoryCommand::execute);
 
         var action = Commands.argument("action", StringArgumentType.word())
-                .requires(req -> req.getSender().hasPermission("keepinventory.command.self"))
+                .requires(req -> req.getSender().hasPermission(KeepInventoryPermissions.Permissions.COMMAND_SELF.get()))
                 .suggests((ctx, builder) -> {
                     List.of("on", "off", "check").forEach(builder::suggest);
                     return builder.buildFuture();
