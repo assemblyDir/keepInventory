@@ -25,17 +25,16 @@ import java.util.List;
 
 public final class KeepInventoryCommand {
 
+    private static final String COMMAND_NAME = "keepinventory";
+    private static final Collection<String> COMMAND_ALIASES = List.of("keepinv");
+
     public static void register(@NotNull JavaPlugin instance) {
         instance.getLifecycleManager().registerEventHandler(LifecycleEvents.COMMANDS, commands -> {
-            commands.registrar().register(command(), aliases());
+            commands.registrar().register(commandNode(), COMMAND_ALIASES);
         });
     }
 
-    private static Collection<String> aliases() {
-        return List.of("keepinv");
-    }
-
-    private static LiteralCommandNode<CommandSourceStack> command() {
+    private static LiteralCommandNode<CommandSourceStack> commandNode() {
         var player = Commands.argument("player", ArgumentTypes.player())
                 .requires(req -> req.getSender().hasPermission("keepinventory.command.other"))
                 .executes(KeepInventoryCommand::execute);
@@ -43,13 +42,12 @@ public final class KeepInventoryCommand {
         var action = Commands.argument("action", StringArgumentType.word())
                 .requires(req -> req.getSender().hasPermission("keepinventory.command.self"))
                 .suggests((ctx, builder) -> {
-                    List<String> suggestions = List.of("on", "off", "check");
-                    for (String suggest : suggestions) builder.suggest(suggest);
+                    List.of("on", "off", "check").forEach(builder::suggest);
                     return builder.buildFuture();
                 })
                 .executes(KeepInventoryCommand::execute);
 
-        return Commands.literal("keepinventory")
+        return Commands.literal(COMMAND_NAME)
                 .then(action.then(player))
                 .build();
     }
